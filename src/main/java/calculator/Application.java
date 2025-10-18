@@ -15,7 +15,7 @@ public class Application {
             // 공백입력시
             if (str.length() <= 0) {
 //                System.out.println("case 1");
-//                System.out.println("결과 : 0");
+                System.out.println("결과 : 0");
                 return;
             }
             // 커스텀구분자 이후의 문자열
