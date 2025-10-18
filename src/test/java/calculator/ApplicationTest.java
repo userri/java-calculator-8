@@ -23,6 +23,50 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+    // TODO: "//\n"0으로 해야하는지
+    // TODO: "//\n,;" 커스텀구분기호 뒤 구분자만 있다면
+    // TODO: ":" 구분자만 있다면
+
+    // //\n2:3 커스텀구분자기호 있음, 구분자 없음
+    @Test
+    void 커스텀_예외_테스트_1() {
+        assertSimpleTest(() -> {
+            run("//\\n2:3");
+            assertThat(output()).contains("결과 : 5");
+        });
+    }
+    // // \n2:3 구분자가 공백
+    @Test
+    void 커스텀_예외_테스트_2() {
+        assertSimpleTest(() -> {
+            run("// \\n2:3");
+            assertThat(output()).contains("결과 : 5");
+        });
+    }
+    // //\n2:-3 음수
+    @Test
+    void 커스텀_예외_테스트_3() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//\\n2:-3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    // 구분자 두글자 이상 //#@\n3,4
+    @Test
+    void 커스텀_예외_테스트_4() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//#@\\n2:3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+    // TODO 문자열 끝이 구분자 //!\n3,4#
+    @Test
+    void 커스텀_예외_테스트_5() {
+        assertSimpleTest(() -> {
+            run("//!\\n2:3!");
+            assertThat(output()).contains("결과 : 5");
+        });
+    }
 
     @Override
     public void runMain() {
