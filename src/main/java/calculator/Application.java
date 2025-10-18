@@ -36,12 +36,15 @@ public class Application {
                 int b = str.indexOf("\\n");
 //                System.out.println("a: " + a);
 //                System.out.println("b: " + b);
+                // "//"와 "\n" 사이에 한 글자가 있다면 "//"와 "\n" 인덱스 차이는 3
                 if (b - a == 3 && !Character.isDigit(str.charAt(2))) {
                     // 만약 가운데가 숫자가 아니라면 delimeter 리스트에 추가
                     deli.add(str.substring(2, 3));
                     // 커스텀 구분자 이후의 문자열을 따로 저장
                     newStr = str.substring(5);
+                // "//"와 "\n" 사이에 아무글자가 없다면 "//"와 "\n" 인덱스 차이는 2
                 } else if (b - a == 2) {
+                    //
                     newStr = str.substring(4);
                 } else {
 //                    System.out.println("case 2");
