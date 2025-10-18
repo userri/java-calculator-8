@@ -1,17 +1,15 @@
 package calculator;
 
-import javax.swing.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.StringTokenizer;
+
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        String str = sc.nextLine();
+        String str = Console.readLine();
         int sum = 0;
         try {
             // 공백입력시
