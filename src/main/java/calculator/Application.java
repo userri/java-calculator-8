@@ -20,11 +20,12 @@ public class Application {
             // 커스텀구분자 이후의 문자열
             String newStr = "";
 
+            // 구분자(delimeter) 리스트 선언 및 기본 구분자 추가
             List<String> deli = new ArrayList<>();
             deli.add(",");
             deli.add(":");
 
-            // 첫글자로 case 구분
+            // 첫글자로 case 구분(숫자인지 아닌지)
             if (Character.isDigit(str.charAt(0))) {
                 // 구분자 없는 경우
                 newStr = str;
@@ -41,7 +42,7 @@ public class Application {
                     newStr = str.substring(5);
                     // "//"와 "\n" 사이에 아무글자가 없다면 "//"와 "\n" 인덱스 차이는 2
                 } else if (b - a == 2) {
-                    //
+                    // 커스텀 구분자 이후의 문자열을 따로 저장
                     newStr = str.substring(4);
                 } else {
                     throw new IllegalArgumentException();
@@ -49,10 +50,14 @@ public class Application {
             } else {
                 throw new IllegalArgumentException();
             }
+
+            // 구분자를 모아서 StringTokenizer로 전달하기 위해 join
             String joinDeli = String.join("", deli);
             try {
+                // 기본구분자 외에 추가구분자가 존재하지 않는 경우
                 if (deli.size() < 3) {
                     StringTokenizer st = new StringTokenizer(newStr, joinDeli);
+                    // 토큰을 순회하며 합계 계산, 숫자가 아니거나 음수이면 오류 생성
                     while (st.hasMoreTokens()) {
                         int num = Integer.parseInt(st.nextToken());
                         if (num < 0) {
@@ -60,6 +65,7 @@ public class Application {
                         }
                         sum += num;
                     }
+                // 기본구분자 외에 추가 구분자가 있는 경우
                 } else if (deli.size() == 3) {
                     StringTokenizer st = new StringTokenizer(newStr, joinDeli);
                     while (st.hasMoreTokens()) {
